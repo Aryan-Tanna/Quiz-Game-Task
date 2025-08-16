@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exétasi.QUIZO</title>
+    
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- 🎨 Funky & Beautiful Quiz Styles 🎨 --- */
+
+        :root {
+            /* Consolidated & Refined Color Palette */
+            --primary-indigo: #4f46e5;
+            --primary-blue: #3b82f6;
+            --light-blue: #90b7f9;
+            --bg-dark-start: #0f172a;
+            --bg-dark-end: #111827;
+            --container-bg: rgba(30, 41, 59, 0.6); /* Semi-transparent for glass effect */
+            --border-color: rgba(55, 65, 81, 0.7);
+            --text-light: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        /* --- ✨ Animated Background & Base Styles ✨ --- */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-95deg, var(--bg-dark-start), var(--bg-dark-end), #1e293b, #374151);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            margin: 0;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* --- 💎 Glassmorphism Header 💎 --- */
+        .quiz-header {
+            background: var(--container-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .quiz-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-blue);
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(144, 183, 249, 0.5);
+            transition: color 0.3s ease;
+        }
+        .quiz-title:hover {
+            color: white;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            background-color: rgba(15, 23, 42, 0.5);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        /* --- 🚀 Animated Form & Modal Container 🚀 --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-container, .modal {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            background: var(--container-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(79, 70, 229, 0.3);
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+
+        /* --- ✨ Unique Floating Label Inputs ✨ --- */
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .feedback-input {
+            width: 100%;
+            padding: 14px 14px 14px 45px; /* Make space for icon */
+            background-color: var(--bg-dark-start);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .floating-label {
+            position: absolute;
+            top: 15px;
+            left: 45px;
+            color: var(--text-secondary);
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        .feedback-input:focus {
+            outline: none;
+            border-color: var(--primary-indigo);
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.5);
+        }
+
+        .feedback-input:focus + .floating-label,
+        .feedback-input:not(:placeholder-shown) + .floating-label {
+            top: -10px;
+            left: 40px;
+            font-size: 0.8rem;
+            background-color: #2f5592; /* Match container inner bg */
+            padding: 0 5px;
+            color: var(white);
+        }
+
+        .feedback-input:focus ~ .input-icon {
+            color: var(--primary-indigo);
+        }
+
+        /* --- 🔥 Pulsing Submit Button 🔥 --- */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+        }
+
+        input.submit {
+            height: 60px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-indigo));
+            animation: pulseGlow 3s infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 40px;
+        }
+        input.submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.7);
+        }
+
+        /* --- 📜 Secondary Action Buttons 📜 --- */
+        .secondary-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+        .secondary-btn {
+            flex-grow: 1;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        .secondary-btn:hover {
+            background-color: var(--primary-indigo);
+            color: white;
+            border-color: var(--primary-indigo);
+        }
+        
+        /* --- 🌟 Animated Progress Bar 🌟 --- */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        .progress-bar { background: linear-gradient(to right, var(--primary-blue) 40%, var(--primary-indigo) 60%); background-size: 200% 100%; position: relative; overflow: hidden; }
+        .progress-bar::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); animation: shimmer 2s infinite linear; }
+        
+        /* --- 🌌 Footer Enhancements 🌌 --- */
+        .site-footer { background-color: transparent; border-top: 1px solid var(--border-color); padding: 2rem; text-align: center; }
+        .social-icon:hover { color: var(--light-blue); transform: translateY(-4px) scale(1.1); text-shadow: 0 0 10px var(--light-blue); }
+
+        /* --- 🏆 Modals for Instructions & Leaderboard 🏆 --- */
+        .modal {
+            display: none; /* Hidden by default */
+            text-align: left;
+        }
+        .modal h2 {
+            text-align: center;
+            color: var(--light-blue);
+            margin-bottom: 1.5rem;
+        }
+        .modal ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .modal li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        .modal li i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--primary-blue);
+        }
+        .leaderboard-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        .leaderboard-entry:nth-child(odd) {
+            background-color: rgba(15, 23, 42, 0.5);
+        }
+        .leaderboard-name { font-weight: 600; }
+        .leaderboard-score { color: var(--light-blue); }
+
+        /* --- (Keeping existing selectors as requested) --- */
+        #a{ font-size:1.5rem; font-weight: bold; color: #e2e8f0; z-index: 2; }
+        .quiz-title i { margin-right: 0.5rem; }
+        .quiz-stats { display: flex; align-items: center; gap: 2rem; }
+        .stat-item { display: flex; align-items: center; font-size: 1.1rem; font-weight: 500; }
+        .stat-item i { font-size: 1.2rem; margin-right: 0.5rem; color: var(--light-blue); }
+        .stat-label { margin-right: 0.5rem; opacity: 0.8; }
+        .progress-container { width: 100%; background-color: var(--container-bg); border-radius: 5px; margin-top: 0.5rem; flex-basis: 100%; order: 3; }
+        .progress-bar { height: 10px; border-radius: 5px; }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+        .back-to-top { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .back-to-top:hover { color: var(--light-blue); }
+        .back-to-top i { margin-left: 0.5rem; }
+        .social-media { display: flex; gap: 1.5rem; }
+        .social-icon { color: var(--text-secondary); font-size: 1.5rem; transition: all 0.3s ease; }
+        .footer-copyright p { margin: 0; font-size: 0.9rem; }
+        .select-wrapper { position: relative; }
+        .feedback-select { width: 100%; padding: 14px; border-radius: 8px; }
+        .form-label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); }
+        @media (max-width: 768px) {
+            .quiz-header { flex-direction: column; align-items: flex-start; }
+            .quiz-stats { width: 100%; justify-content: space-between; gap: 1rem; }
+            .progress-container { order: initial; }
+        }
+        @media (max-width: 480px) {
+            .stat-item { font-size: 1rem; }
+            .quiz-title { font-size: 1.3rem; }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="quiz-header">
+        <a href="./index.html" class="quiz-title">
+            <i class="fa-solid fa-brain"></i>    
+            Exétasi.QUIZO
+        </a>
+        <div class="quiz-stats">
+            <div class="stat-item">
+                <i class="fa-solid fa-star"></i>
+                <span class="stat-label">Score:</span>
+                <span class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-list-ol"></i>
+                <span class="stat-label">Question:</span>
+                <span class="stat-value">1 / 10</span>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-stopwatch"></i>
+                <span class="stat-label">Time:</span>
+                <span id="a" class="stat-value">45</span>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="box" style="width: 100%;"></div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div id="form-container" class="form-container">
+            <form id="quiz-setup-form">
+                <div class="input-group">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input name="name" type="text" id="name" class="feedback-input" placeholder=" " required />
+                    <label for="name" class="floating-label">Name</label>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-icon"></i>
+                    <input name="email" type="email" id="email" class="feedback-input" placeholder=" " required />
+                    <label for="email" class="floating-label">Email</label>
+                </div>
+                
+                <label for="Q" class="form-label">Number Of Questions</label>
+                <div class="select-wrapper">
+                    <select id="Q" name="Qaa" class="feedback-input feedback-select">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+                <input type="submit" id="submit" class="submit" value="Start Quiz" />
+            </form>
+            <div class="secondary-actions">
+                <button id="show-instructions" class="secondary-btn"><i class="fa-solid fa-circle-info"></i> Instructions</button>
+                <button id="show-leaderboard" class="secondary-btn"><i class="fa-solid fa-trophy"></i> Leaderboard</button>
+            </div>
+        </div>
+
+        <!-- Instructions Modal -->
+        <div id="instructions-modal" class="modal">
+            <h2><i class="fa-solid fa-scroll"></i> How to Play</h2>
+            <ul>
+                <li><i class="fa-solid fa-check"></i>Enter your name and email to begin.</li>
+                <li><i class="fa-solid fa-list-ol"></i>Select the number of questions you want to answer.</li>
+                <li><i class="fa-solid fa-stopwatch"></i>You have 45 seconds to answer each question.</li>
+                <li><i class="fa-solid fa-star"></i>Correct answers earn points, but incorrect answers will deduct points!</li>
+            </ul>
+            <button id="close-instructions" class="secondary-btn">Back to Quiz</button>
+        </div>
+
+        <!-- Leaderboard Modal -->
+        <div id="leaderboard-modal" class="modal">
+            <h2><i class="fa-solid fa-trophy"></i> Leaderboard</h2>
+            <div id="leaderboard-list">
+                <!-- Example Entry -->
+                <div class="leaderboard-entry">
+                    <span class="leaderboard-name0"></span>
+                    <span class="leaderboard-score0"></span>
+                </div>
+                <div class="leaderboard-entry">
+                    <span class="leaderboard-name1"></span>
+                    <span class="leaderboard-score1"></span>
+                </div>
+                <div class="leaderboard-entry">
+                    <span class="leaderboard-name2"></span>
+                    <span class="leaderboard-score2"></span>
+                </div>
+            </div>
+            <button id="close-leaderboard" class="secondary-btn">Back to Quiz</button>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" class="back-to-top">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+            </div>
+            <div class="social-media">
+                <a href="https://github.com/Aryan-Tanna" aria-label="GitHub" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/aryan-tanna-842594316/" aria-label="LinkedIn" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href= "" aria-label="Twitter" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 Exétasi.QUIZO . All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formContainer = document.getElementById('form-container');
+            const instructionsModal = document.getElementById('instructions-modal');
+            const leaderboardModal = document.getElementById('leaderboard-modal');
+
+            const showInstructionsBtn = document.getElementById('show-instructions');
+            const showLeaderboardBtn = document.getElementById('show-leaderboard');
+
+            const closeInstructionsBtn = document.getElementById('close-instructions');
+            const closeLeaderboardBtn = document.getElementById('close-leaderboard');
+
+            // Function to show a modal and hide the form
+            const showModal = (modalToShow) => {
+                formContainer.style.display = 'none';
+                modalToShow.style.display = 'block';
+            };
+
+            // Function to hide modals and show the form
+            const closeModal = () => {
+                instructionsModal.style.display = 'none';
+                leaderboardModal.style.display = 'none';
+                formContainer.style.display = 'block';
+            };
+
+            // Event Listeners
+            showInstructionsBtn.addEventListener('click', () => showModal(instructionsModal));
+            showLeaderboardBtn.addEventListener('click', () => showModal(leaderboardModal));
+
+            closeInstructionsBtn.addEventListener('click', closeModal);
+            closeLeaderboardBtn.addEventListener('click', closeModal);
+        });
+    </script>
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script>
+    var candidates=[];
+    var Scores=[]
+    function sort(){
+    for(i=0;i<Scores.length;i++){
+      for(j=i+1;j<Scores.length;j++){
+        if(candidates[i][1]<candidates[j][1]){
+          var temp=candidates[i]
+          candidates[i]=candidates[j]
+          candidates[j]=temp
+        }
+      }
+    }}
+    function remove(){
+    for(i=0;i<Scores.length;i++){
+      for(j=i+1;j<Scores.length;j++){
+        if(candidates[i][0]===candidates[j][0]){
+         candidates[j]=['----','0']
+        }
+      }
+    }sort();}
+const Score=localStorage.getItem('quizScores')
+    if(Score){
+    Scores=JSON.parse(Score)}
+    const Candis=localStorage.getItem('quizCandidates')
+    if(Candis){
+    candidates=JSON.parse(Candis)}
+        // Select the form using its ID
+        if(candidates){
+            sort();
+            remove();
+        yo=candidates.length
+        if(yo>=3){yo=3}
+        for(i=0;i<yo;i++){
+  $(".leaderboard-name"+i).text(i+1+". "+candidates[i][0])
+  $(".leaderboard-score"+i).text(candidates[i][1])}
+}
+       
+        const quizForm = document.getElementById('quiz-setup-form');
+
+        // Listen for the 'submit' event
+        quizForm.addEventListener('submit', function(event) {
+            // Prevent the default form submission (which would reload the page)
+            event.preventDefault();
+  // --- Load Existing Data ---
+// Get the saved data, or start with an empty array if it doesn't exist
+var userNames = JSON.parse(localStorage.getItem('quizUserNames')) || [];
+var userEmails = JSON.parse(localStorage.getItem('quizUserEmails')) || [];
+var userQuestionCounts = JSON.parse(localStorage.getItem('quizQuestionCounts')) || [];
+
+// --- Get New Data from Form ---
+var name = document.getElementById("name").value;
+var email = document.getElementById("email").value;
+var noq = document.getElementById("Q").value;
+
+// --- Add New Data to Arrays ---
+userNames.push(name);
+userEmails.push(email);
+userQuestionCounts.push(noq);
+
+// --- Save the Updated Arrays Back to Storage ---
+localStorage.setItem('quizUserNames', JSON.stringify(userNames));
+localStorage.setItem('quizUserEmails', JSON.stringify(userEmails));
+localStorage.setItem('quizQuestionCounts', JSON.stringify(userQuestionCounts));
+            // The 'submit' event only runs if the 'required' fields are filled out.
+            // So, if we get here, the form is valid.
+
+            // Now, we can manually change the page to the game.
+            console.log('Form is valid! Starting quiz...');
+           window.location.href="./Game.html"
+        });
+ document.addEventListener('keydown', function(event) {
+  // Check if Ctrl and Shift are pressed along with a specific key (e.g., 'S')
+  if (event.ctrlKey && event.shiftKey  && event.key.toLowerCase() === 'x') {
+    event.preventDefault(); // Prevent default browser action (e.g., saving)
+    console.log('Local Storage cleared!');
+    localStorage.clear();
+    // Add your custom logic here
+  }
+});
+    </script> 
+   
+
+<html>

@@ -1,0 +1,98 @@
+#overlay{
+z-index: 2;
+justify-items: center;
+align-items: center;
+}
+.animated-text {
+  /* Basic styling for your text */
+  font-size: 2em;
+  color: #ffffff;
+  text-align: center;
+font-size: 40vh;
+position:fixed;
+margin: 0;
+  /* Apply the animation */
+  animation-name: customTextAnimation; /* Name of your keyframes */
+  animation-duration: 1s; /* The animation will last 5 seconds */
+  animation-timing-function: ease-out; /* Controls the speed curve */
+  animation-iteration-count: 3; /* Repeats indefinitely (or a number) */
+  animation-fill-mode: forwards; /* Keeps the final state after animation */
+}
+
+@keyframes customTextAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-70px);
+  }
+  25% {
+    opacity: 0.7;
+    transform: translateY(-15);
+  }
+  50%{
+    opacity: 1;
+    transform: translateY(-15);
+  }
+  75% {
+    opacity: 0.9;
+    transform: translateY(20);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+}
+ /* --- General Styling --- */
+     
+
+        /* --- Timer Container --- */
+        .timer-container {
+          float: right;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Countdown Number --- */
+        #time-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #e2e8f0; /* Light text color */
+            z-index: 2;
+        }
+        #a{
+           font-size:1.5rem;
+            font-weight: bold;
+            color: #e2e8f0; /* Light text color */
+            z-index: 2;
+        }
+
+        /* --- SVG for Circular Animation --- */
+        .timer-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg); /* Start the circle from the top */
+            z-index: 1;
+        }
+
+        .timer-circle {
+            fill: none;
+            stroke-width: 10px;
+        }
+
+        /* The background track of the circle */
+        .timer-circle-bg {
+            stroke: #334155; /* Dark, neutral track color */
+        }
+
+        /* The animated progress bar */
+        .timer-circle-progress {
+            stroke: url(#timer-gradient); /* Apply the gradient */
+            stroke-linecap: round; /* Smooth ends for the progress bar */
+            transition: stroke-dashoffset 0.5s linear;
+        }
