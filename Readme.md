@@ -1,8 +1,8 @@
-# 🧠 BrainiacQuiz - A Dynamic Web-Based Quiz Game
+# 🧠 Exétasi.QUIZO - A Dynamic Web-Based Quiz Game
 
-![BrainiacQuiz Showcase](https://placehold.co/800x400/0f172a/90b7f9?text=BrainiacQuiz)
+![Exétasi.QUIZO Showcase](https://placehold.co/800x400/0f172a/90b7f9?text=Exétasi.QUIZO)
 
-Welcome to **BrainiacQuiz**, a sleek and interactive quiz application designed to test your knowledge with a modern, engaging user experience. Built with core web technologies, this project showcases dynamic animations, persistent leaderboards, and a polished, futuristic design.
+Welcome to **Exétasi.QUIZO**, a sleek and interactive quiz application designed to test your knowledge with a modern, engaging user experience. Built with core web technologies, this project showcases dynamic animations, persistent leaderboards, and a polished, futuristic design.
 
 ---
 
