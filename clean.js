@@ -3,15 +3,88 @@
 // =================================================================================
 
 const quizQuestions = [
-    "Which company developed the Android operating system?", "Which HTML tag is used to display the largest heading?", "Which is the largest planet in our solar system?", "Which HTML element is used for inserting a line break?", "Who wrote the play 'Romeo and Juliet'?", "What does HTML stand for?", "Which shortcut is used to copy selected text on most computers?", "In JavaScript, `===` means:", "What is the capital city of Japan?", "Which property changes the text color in CSS?", "Who is known as the father of the World Wide Web?", "What does the 'src' attribute in the <img> tag specify?", "How many continents are there in the world?", "Which company developed the Android operating system?", "In computing, 'www' stands for:", "Which animal is known as the 'Ship of the Desert'?", "Which is the most popular web browser in the world (as of 2025)?", "What does 'URL' stand for?", "Which symbol is used for comments in CSS?", "Which programming language is used for adding interactivity to a web page?"
+  "Which company developed the Android operating system?",
+  "Which HTML tag is used to display the largest heading?",
+  "Which is the largest planet in our solar system?",
+  "Which HTML element is used for inserting a line break?",
+  "Who wrote the play 'Romeo and Juliet'?",
+  "What does HTML stand for?",
+  "Which shortcut is used to copy selected text on most computers?",
+  "In JavaScript, `===` means:",
+  "What is the capital city of Japan?",
+  "Which property changes the text color in CSS?",
+  "Who is known as the father of the World Wide Web?",
+  "What does the 'src' attribute in the <img> tag specify?",
+  "How many continents are there in the world?",
+  "Which company developed the Android operating system?",
+  "In computing, 'www' stands for:",
+  "Which animal is known as the 'Ship of the Desert'?",
+  "Which is the most popular web browser in the world (as of 2025)?",
+  "What does 'URL' stand for?",
+  "Which symbol is used for comments in CSS?",
+  "Which programming language is used for adding interactivity to a web page?"
 ];
-
 const options = [
-    ["Microsoft", "Apple", "Google", "Samsung"], ["<heading>", "<h6>", "<h1>", "<head>"], ["Earth", "Jupiter", "Saturn", "Neptune"], ["<break>", "<br>", "<lb>", "<line>"], ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"], ["Hyper Text Markup Language", "High Text Machine Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"], ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"], ["Assignment", "Equal in value and type", "Equal in value only", "Not equal"], ["Kyoto", "Osaka", "Tokyo", "Hiroshima"], ["color", "text-color", "font-color", "bgcolor"], ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"], ["Image size", "Image style", "Image source file path", "Image title"], ["5", "6", "7", "8"], ["World Wide Web", "Wide World Web", "Web Wide World", "World Web Wide"], ["Horse", "Camel", "Donkey", "Elephant"], ["Firefox", "Safari", "Chrome", "Edge"], ["Uniform Resource Locator", "Universal Resource List", "Unique Reference Link", "Uniform Reference Locator"], ["// comment //", "/* comment */", "<!-- comment -->", "# comment #"], ["HTML", "CSS", "JavaScript", "SQL"]
-];
+    
+    ["Microsoft", "Apple", "Google", "Samsung"],
+   
+    ["<heading>", "<h6>", "<h1>", "<head>"],
+    
+    ["Earth", "Jupiter", "Saturn", "Neptune"],
+    
+    ["<break>", "<br>", "<lb>", "<line>"],
+    
+    ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+    
+    ["Hyper Text Markup Language", "High Text Machine Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+    
+    ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"],
+    
+    ["Assignment", "Equal in value and type", "Equal in value only", "Not equal"],
 
+    ["Kyoto", "Osaka", "Tokyo", "Hiroshima"],
+    ["color", "text-color", "font-color", "bgcolor"],
+
+    ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"],
+    ["Image size", "Image style", "Image source file path", "Image title"],
+
+    ["5", "6", "7", "8"],
+    
+    ["Microsoft", "Apple", "Google", "Samsung"],
+    
+    ["World Wide Web", "Wide World Web", "Web Wide World", "World Web Wide"],
+    
+    ["Horse", "Camel", "Donkey", "Elephant"],
+   
+    ["Firefox", "Safari", "Chrome", "Edge"],
+    
+    ["Uniform Resource Locator", "Universal Resource List", "Unique Reference Link", "Uniform Reference Locator"],
+   
+    ["// comment //", "/* comment */", "<!-- comment -->", "# comment #"],
+ 
+    ["HTML", "CSS", "JavaScript", "SQL"]
+];
 const answers = [
-    "Google", "<h1>", "Jupiter", "<br>", "William Shakespeare", "Hyper Text Markup Language", "Ctrl + C", "Equal in value and type", "Tokyo", "color", "Tim Berners-Lee", "Image source file path", "7", "World Wide Web", "Camel", "Chrome", "Uniform Resource Locator", "/* comment */", "JavaScript"
+  "Google",
+  "<h1>",
+  "Jupiter",
+  "<br>",
+  "William Shakespeare",
+  "Hyper Text Markup Language",
+  "Ctrl + C",
+  "Equal in value and type",
+  "Tokyo",
+  "color",
+  "Tim Berners-Lee",
+  "Image source file path",
+  "7",
+  "Google",
+  "World Wide Web",
+  "Camel",
+  "Chrome",
+  "Uniform Resource Locator",
+  "/* comment */",
+  "JavaScript"
 ];
 
 // =================================================================================
