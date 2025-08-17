@@ -21,25 +21,44 @@ const quizQuestions = [
   "Which programming language is used for adding interactivity to a web page?"
 ];
 const options = [
-  ["Microsoft", "Apple", "Google", "Samsung"],
-  ["<heading>", "<h6>", "<h1>", "<head>"],
-  ["Earth", "Jupiter", "Saturn", "Neptune"],
-  ["<break>", "<br>", "<lb>", "<line>"],
-  ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
-  ["Hyper Text Markup Language", "High Text Machine Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
-  ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"],
-  ["Assignment", "Equal in value and type", "Equal in value only", "Not equal"],
-  ["Kyoto", "Osaka", "Tokyo", "Hiroshima"],
-  ["color", "text-color", "font-color", "bgcolor"],
-  ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"],
-  ["Image size", "Image style", "Image source file path", "Image title"],
-  ["5", "6", "7", "8"],
-  ["World Wide Web", "Wide World Web", "Web Wide World", "World Web Wide"],
-  ["Horse", "Camel", "Donkey", "Elephant"],
-  ["Firefox", "Safari", "Chrome", "Edge"],
-  ["Uniform Resource Locator", "Universal Resource List", "Unique Reference Link", "Uniform Reference Locator"],
-  ["// comment //", "/* comment */", "<!-- comment -->", "# comment #"],
-  ["HTML", "CSS", "JavaScript", "SQL"]
+    
+    ["Microsoft", "Apple", "Google", "Samsung"],
+   
+    ["<heading>", "<h6>", "<h1>", "<head>"],
+    
+    ["Earth", "Jupiter", "Saturn", "Neptune"],
+    
+    ["<break>", "<br>", "<lb>", "<line>"],
+    
+    ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+    
+    ["Hyper Text Markup Language", "High Text Machine Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+    
+    ["Ctrl + X", "Ctrl + C", "Ctrl + V", "Ctrl + Z"],
+    
+    ["Assignment", "Equal in value and type", "Equal in value only", "Not equal"],
+
+    ["Kyoto", "Osaka", "Tokyo", "Hiroshima"],
+    ["color", "text-color", "font-color", "bgcolor"],
+
+    ["Bill Gates", "Tim Berners-Lee", "Steve Jobs", "Linus Torvalds"],
+    ["Image size", "Image style", "Image source file path", "Image title"],
+
+    ["5", "6", "7", "8"],
+    
+    ["Microsoft", "Apple", "Google", "Samsung"],
+    
+    ["World Wide Web", "Wide World Web", "Web Wide World", "World Web Wide"],
+    
+    ["Horse", "Camel", "Donkey", "Elephant"],
+   
+    ["Firefox", "Safari", "Chrome", "Edge"],
+    
+    ["Uniform Resource Locator", "Universal Resource List", "Unique Reference Link", "Uniform Reference Locator"],
+   
+    ["// comment //", "/* comment */", "<!-- comment -->", "# comment #"],
+ 
+    ["HTML", "CSS", "JavaScript", "SQL"]
 ];
 const answers = [
   "Google",
@@ -55,6 +74,7 @@ const answers = [
   "Tim Berners-Lee",
   "Image source file path",
   "7",
+  "Google",
   "World Wide Web",
   "Camel",
   "Chrome",
